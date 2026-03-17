@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, UseGuards } from '@nestjs/common';
 import { ProdutoService } from '../Service/produto.service';
 import { Produto } from '../Entities/produto.entity';
+import { JwtAuthGuard } from '../../auth/guard/jewt-auth.guard';
 
-
+@UseGuards(JwtAuthGuard)
 @Controller('/produto')
 export class ProdutoController {
 
@@ -23,16 +24,19 @@ export class ProdutoController {
     return this.produtoService.findByNome(nome);
   }
 
+  
   @Post()
   create(@Body() produto: Produto) {
     return this.produtoService.create(produto);
   }
 
+  
   @Put()
   update(@Body() produto: Produto) {
     return this.produtoService.update(produto);
   }
 
+ 
   @Delete('/:id')
   delete(@Param('id') id: number) {
     return this.produtoService.delete(id);

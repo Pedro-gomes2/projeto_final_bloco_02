@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, UseGuards } from '@nestjs/common';
 import { CategoriaService } from '../Service/categoria.service';
 import { Categoria } from '../Entities/categoria.entity';
+import { JwtAuthGuard } from '../../auth/guard/jewt-auth.guard';
 
-
+@UseGuards(JwtAuthGuard)
 @Controller('/categoria')
 export class CategoriaController {
 
@@ -23,16 +24,20 @@ export class CategoriaController {
     return this.categoriaService.findByDescricao(descricao);
   }
 
+  
   @Post()
   create(@Body() categoria: Categoria) {
     return this.categoriaService.create(categoria);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put()
   update(@Body() categoria: Categoria) {
     return this.categoriaService.update(categoria);
   }
 
+
+  
   @Delete('/:id')
   delete(@Param('id') id: number) {
     return this.categoriaService.delete(id);
