@@ -14,14 +14,14 @@ export class CategoriaService {
 
   async findAll(): Promise<Categoria[]> {
     return await this.categoriaRepository.find({
-      
+      relations: ['produtos'],
     });
   }
 
   async findById(id: number): Promise<Categoria> {
     const categoria = await this.categoriaRepository.findOne({
       where: { id },
-      
+      relations: ['produtos'],
     });
 
     if (!categoria) {
