@@ -9,7 +9,7 @@ import { CategoriaModule } from '../categoria/categoria.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Produto]), CategoriaModule
+    TypeOrmModule.forFeature([Produto, CategoriaModule]),
   ],
   controllers: [ProdutoController],
   providers: [ProdutoService],
