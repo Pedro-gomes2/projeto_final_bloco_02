@@ -4,7 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { UsuarioLogin } from '../entities/usuariologin.entities';
 import { ApiTags } from '@nestjs/swagger';
 
-
+@ApiTags('Usuario')
 @Controller("/usuarios")
 export class AuthController {
     constructor(private authService: AuthService) { }//AuthService é injetado no construtor para ser usado nos métodos.
